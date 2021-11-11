@@ -15,6 +15,12 @@ export const theme = extendTheme({
       '50': '#EEEEF2',
     },
   },
+
+  fonts: {
+    body: '"Roboto", sans-serif',
+    heading: '"Roboto", sans-serif',
+  },
+
   styles: {
     global: {
       body: {
