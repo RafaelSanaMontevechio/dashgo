@@ -1,4 +1,5 @@
-import { createServer, Model } from 'miragejs';
+import { createServer, Factory, Model } from 'miragejs';
+import faker from 'faker'; //usada para a geração de dados aleatórios
 
 type User = {
   name: string;
@@ -11,6 +12,28 @@ export function makeServer() {
     models: {
       user: Model.extend<Partial<User>>({}),
     },
+
+    //cria dados fictícios
+    factories: {
+      user: Factory.extend({
+        name(i: number) {
+          return `User ${i + 1}`;
+        },
+
+        email() {
+          return faker.internet.email().toLocaleLowerCase();
+        },
+
+        created_at() {
+          return faker.date.recent(10);
+        },
+      }),
+    },
+
+    seeds(server) {
+      server.createList('user', 200);
+    },
+
     routes() {
       this.namespace = 'api';
       this.timing = 750;
