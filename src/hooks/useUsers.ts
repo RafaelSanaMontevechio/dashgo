@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery, UseQueryOptions } from 'react-query';
 
 import { api } from '../services/api';
 
@@ -14,7 +14,7 @@ type GetUsersResponse = {
   users: User[];
 };
 
-async function getUsers(currentPage: number): Promise<GetUsersResponse> {
+export async function getUsers(currentPage: number): Promise<GetUsersResponse> {
   const { data, headers } = await api.get('/users', {
     params: { page: currentPage },
   });
